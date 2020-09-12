@@ -1,29 +1,30 @@
-# README #
+# eventos-da-hora-ticket-api project
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-### What is this repository for? ###
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Running the application in dev mode
 
-### How do I get set up? ###
+You can run your application in dev mode that enables live coding using:
+```
+./mvnw quarkus:dev
+```
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Packaging and running the application
 
-### Contribution guidelines ###
+The application can be packaged using `./mvnw package`.
+It produces the `eventos-da-hora-ticket-api-1.0.0-SNAPSHOT-runner.jar` file in the `/target` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
 
-* Writing tests
-* Code review
-* Other guidelines
+The application is now runnable using `java -jar target/eventos-da-hora-ticket-api-1.0.0-SNAPSHOT-runner.jar`.
 
-### Who do I talk to? ###
+## Creating a native executable
 
-* Repo owner or admin
-* Other community or team contact
+You can create a native executable using: `./mvnw package -Pnative`.
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `./mvnw package -Pnative -Dquarkus.native.container-build=true`.
+
+You can then execute your native executable with: `./target/eventos-da-hora-ticket-api-1.0.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
