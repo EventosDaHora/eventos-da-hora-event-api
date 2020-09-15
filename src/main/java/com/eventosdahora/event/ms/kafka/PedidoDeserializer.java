@@ -8,4 +8,6 @@ public class PedidoDeserializer extends JsonbDeserializer<Pedido> {
     public PedidoDeserializer() {
         super(Pedido.class);
     }
+
+    /* asdsadasdasdasd*/
 }
