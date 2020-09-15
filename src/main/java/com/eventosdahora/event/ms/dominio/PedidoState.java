@@ -1,4 +1,4 @@
-package com.eventosdahora.ticket.ms.dominio;
+package com.eventosdahora.event.ms.dominio;
 
 public enum PedidoState {
     NOVO_PEDIDO, TICKET_RESERVADO, TICKET_RESERVADO_ERRO,

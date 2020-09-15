@@ -1,4 +1,4 @@
-package com.eventosdahora.ticket.ms.dominio;
+package com.eventosdahora.event.ms.dominio;
 
 import lombok.*;
 

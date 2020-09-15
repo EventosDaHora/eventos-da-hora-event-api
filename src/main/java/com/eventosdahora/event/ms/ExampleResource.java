@@ -1,4 +1,4 @@
-package com.eventosdahora.ticket.ms;
+package com.eventosdahora.event.ms;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

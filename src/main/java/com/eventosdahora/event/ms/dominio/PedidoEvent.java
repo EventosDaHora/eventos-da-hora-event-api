@@ -1,4 +1,4 @@
-package com.eventosdahora.ticket.ms.dominio;
+package com.eventosdahora.event.ms.dominio;
 
 public enum PedidoEvent {
     RESERVAR_TICKET, RESERVA_TICKET_APROVADO, RESERVA_TICKET_NEGADO,

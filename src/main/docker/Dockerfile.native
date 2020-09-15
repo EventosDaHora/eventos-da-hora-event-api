@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/eventos-da-hora-ticket-api .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/eventos-da-hora-event-api .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/eventos-da-hora-ticket-api
+# docker run -i --rm -p 8080:8080 quarkus/eventos-da-hora-event-api
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1

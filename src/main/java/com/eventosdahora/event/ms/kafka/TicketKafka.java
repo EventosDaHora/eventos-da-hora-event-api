@@ -1,7 +1,7 @@
-package com.eventosdahora.ticket.ms.kafka;
+package com.eventosdahora.event.ms.kafka;
 
-import com.eventosdahora.ticket.ms.dominio.Pedido;
-import com.eventosdahora.ticket.ms.dominio.PedidoEvent;
+import com.eventosdahora.event.ms.dominio.PedidoEvent;
+import com.eventosdahora.event.ms.dominio.Pedido;
 import lombok.extern.java.Log;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
