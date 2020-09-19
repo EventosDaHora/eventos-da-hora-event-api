@@ -1,6 +1,6 @@
-package com.eventosdahora.event.ms.dominio;
+package com.eventosdahora.event.ms.kafka;
 
-public enum PedidoEvent {
+public enum OrderEvent {
     RESERVAR_TICKET, RESERVA_TICKET_APROVADO, RESERVA_TICKET_NEGADO,
     CONSOLIDAR_COMPRA, CONSOLIDACAO_COMPRA_APROVADO,
     RESTAURAR_TICKET, TICKET_RESTAURADO_APROVADO, TICKET_RESTAURADO_NEGADO
