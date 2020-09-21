@@ -2,21 +2,18 @@ package com.eventosdahora.event.ms.dominio;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Log
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Event extends PanacheEntity {
 
-    @Id
-    @GeneratedValue
     @Column(name = "id_event", length = 19)
     public Long id;
 

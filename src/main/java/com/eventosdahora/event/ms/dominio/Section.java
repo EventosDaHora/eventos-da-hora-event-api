@@ -2,18 +2,18 @@ package com.eventosdahora.event.ms.dominio;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Section extends PanacheEntity {
 
-    @Id
-    @GeneratedValue
     @Column(name = "id_section")
     public Long id;
 
