@@ -19,11 +19,11 @@ public class Event extends PanacheEntity {
 
     @JoinColumn(name = "id_category")
     @ManyToOne(fetch = FetchType.LAZY)
-    public Category idCategory;
+    public Category categoryId;
 
     @JoinColumn(name = "id_status_event")
     @ManyToOne(fetch = FetchType.LAZY)
-    public StatusEvent idStatus;
+    public StatusEvent statusId;
 
     @Column(name = "nm_event")
     public String name;
@@ -33,6 +33,9 @@ public class Event extends PanacheEntity {
 
     @Column(name = "ds_event")
     public String description;
+
+    @Embedded
+    public Localization localization;
 
 
 }

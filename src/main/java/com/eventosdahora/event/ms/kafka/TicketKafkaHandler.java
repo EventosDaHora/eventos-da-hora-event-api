@@ -33,14 +33,12 @@ public class TicketKafkaHandler {
 
     @Incoming("tickets-rollback")
     @Outgoing("envia-resposta")
-    public OrderDTO rollback(OrderDTO orderDTO) {
+    @Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
+    public Uni<Message<OrderDTO>> rollback(Message<OrderDTO> orderDTO) {
         log.info("Pedido que chegou do tópico 'executa-reserva-ticket-rollback': " + orderDTO);
 
-        if (new Random().nextInt(100) < 80) {
-            orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_APROVADO);
-        } else {
-            orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_NEGADO);
-        }
-        return orderDTO;
+        return eventService
+                .handleOrder(orderDTO.getPayload())
+                .map(orderDTO::withPayload);
     }
 }

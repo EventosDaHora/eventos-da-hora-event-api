@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class TicketDTO {
 
-    private Long ticketId;
+    private Long id;
 
-    private Long qtdTicket;
+    private Long ammount;
 }

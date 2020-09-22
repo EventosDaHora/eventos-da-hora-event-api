@@ -1,7 +1,6 @@
 package com.eventosdahora.event.ms.dominio;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
 public class Localization {
@@ -21,9 +20,11 @@ public class Localization {
     @Column(name = "nu_address", length = 10, nullable = false)
     public String numero;
 
-    @Column(name = "id_country", length = 19)
-    public Long idCountry;
+    @JoinColumn(name = "id_country")
+    @ManyToOne
+    public Country country;
 
-    @Column(name = "id_city", length = 19)
-    public Long idCity;
+    @JoinColumn(name = "id_city")
+    @ManyToOne(fetch = FetchType.LAZY)
+    public City city;
 }

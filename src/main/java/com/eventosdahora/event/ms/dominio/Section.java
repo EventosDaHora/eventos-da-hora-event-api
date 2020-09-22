@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Builder
 @NoArgsConstructor
@@ -27,7 +28,7 @@ public class Section extends PanacheEntity {
     @Column(name = "ds_section", length = 500)
     public String descricao;
 
-    @Column(name = "vi_amount")
+    @Column(name = "vl_amount")
     public BigDecimal ammount;
 
     public String metadata;
