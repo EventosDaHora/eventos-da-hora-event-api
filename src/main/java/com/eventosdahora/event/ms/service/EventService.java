@@ -18,7 +18,6 @@ import java.util.concurrent.CompletableFuture;
 @ApplicationScoped
 public class EventService {
 
-
     public Uni<OrderDTO> handleOrder(OrderDTO orderDTO) {
         if (OrderEvent.RESERVAR_TICKET.equals(orderDTO.getOrderEvent())) {
             return Uni.createFrom().completionStage(CompletableFuture.supplyAsync(() -> reservaTicket(orderDTO)));
