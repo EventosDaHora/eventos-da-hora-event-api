@@ -65,7 +65,8 @@ public class EventService {
             }
             orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_APROVADO);
         }
-
+    
+        log.info("Reply channel: " + orderDTO);
         return orderDTO;
     }
 
@@ -76,8 +77,10 @@ public class EventService {
             orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_APROVADO);
         } catch (PersistenceException pe) {
             orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_NEGADO);
+            log.info("Reply channel: " + orderDTO);
             return orderDTO;
         }
+        log.info("Reply channel: " + orderDTO);
         return orderDTO;
     }
 
@@ -85,6 +88,7 @@ public class EventService {
     private OrderDTO consolidaCompra(OrderDTO orderDTO) {
         orderDTO.getTickets().forEach(ticketDTO -> TicketReserved.consolidaCompra(ticketDTO.getId(), orderDTO.getOrderId()));
         orderDTO.setOrderEvent(OrderEvent.CONSOLIDACAO_COMPRA_APROVADO);
+        log.info("Reply channel: " + orderDTO);
         return orderDTO;
     }
 }
