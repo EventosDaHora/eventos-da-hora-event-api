@@ -27,8 +27,6 @@ public class OrderDTO {
 
     private OrderEvent orderEvent;
 
-    private Long paymentId;
-
     private BigDecimal fees;
 
     private Long userId;
