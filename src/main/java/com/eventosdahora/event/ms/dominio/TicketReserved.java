@@ -1,6 +1,5 @@
 package com.eventosdahora.event.ms.dominio;
 
-import com.eventosdahora.event.ms.dto.TicketDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.panache.common.Parameters;
 import lombok.AllArgsConstructor;

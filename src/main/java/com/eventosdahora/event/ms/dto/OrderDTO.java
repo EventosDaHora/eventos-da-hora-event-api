@@ -34,5 +34,5 @@ public class OrderDTO {
     @Builder.Default
     private List<TicketDTO> tickets = new ArrayList<>();
     
-    private PaymentDTO payment;
+    private PaymentDTO paymentDTO;
 }
