@@ -28,3 +28,15 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/eventos-da-hora-ticket-api-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+## Deploy no Kubernetes
+
+Criação de Deployments, ConfigMap e Secret
+```
+ kubectl apply -f k8s/postgres-deployment.yaml -n microsservices
+```
+
+Criação de imagem nativa a partir do código da aplicação e deploy no Kubernetes
+```
+mvn clean package -Dquarkus.container-image.build=true -Dquarkus.kubernetes.deploy=true
+```
