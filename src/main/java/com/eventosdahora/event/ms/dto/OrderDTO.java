@@ -2,6 +2,7 @@ package com.eventosdahora.event.ms.dto;
 
 import com.eventosdahora.event.ms.kafka.OrderEvent;
 import com.eventosdahora.event.ms.kafka.OrderState;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,25 +16,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class OrderDTO {
-
-    public static final String IDENTIFICADOR = "ID_PEDIDO";
-
-    private Long orderId;
-
-    private LocalDateTime createdDate;
-
-    private OrderState orderState;
-
-    private OrderEvent orderEvent;
-
-    private BigDecimal fees;
-
-    private Long userId;
-
-    @Builder.Default
-    private List<TicketDTO> tickets = new ArrayList<>();
-    
-    private PaymentDTO paymentDTO;
+	
+	public static final String IDENTIFICADOR = "ID_PEDIDO";
+	
+	private Long orderId;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private LocalDateTime createdDate;
+	
+	private OrderState orderState;
+	
+	private OrderEvent orderEvent;
+	
+	private BigDecimal fees;
+	
+	private Long userId;
+	
+	@Builder.Default
+	private List<TicketDTO> tickets = new ArrayList<>();
+	
+	private PaymentDTO payment;
 }
