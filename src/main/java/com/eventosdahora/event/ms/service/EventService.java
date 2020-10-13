@@ -78,9 +78,11 @@ public class EventService {
         return orderDTO;
     }
     
+    @Transactional
     private boolean isExistTickets(final List<TicketDTO> tickets) {
        
         for(TicketDTO ticket : tickets){
+            log.info("--- Procurando TicketId: " + ticket.getId());
             Optional<PanacheEntityBase> byIdOptional = Ticket.findByIdOptional(ticket.getId());
             if (!byIdOptional.isPresent()){
                 log.info("--- TicketId: " + ticket.getId() + " nao encontrado!");
