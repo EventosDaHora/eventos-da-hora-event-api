@@ -5,6 +5,7 @@ import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.dto.OrderDTO;
 import com.eventosdahora.event.ms.dto.TicketDTO;
 import com.eventosdahora.event.ms.kafka.OrderEvent;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
@@ -12,6 +13,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Log
@@ -37,6 +40,11 @@ public class EventService {
     @Transactional
     private OrderDTO reservaTicket(OrderDTO orderDTO) {
         boolean isOk = true;
+        
+        if(!isExistTickets(orderDTO.getTickets())){
+            orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
+            return orderDTO;
+        }
 
         for (TicketDTO ticketDTO : orderDTO.getTickets()) {
             Long qtdAvailableTickets = TicketReserved.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
@@ -69,7 +77,20 @@ public class EventService {
         log.info("Reply channel: " + orderDTO);
         return orderDTO;
     }
-
+    
+    private boolean isExistTickets(final List<TicketDTO> tickets) {
+       
+        for(TicketDTO ticket : tickets){
+            Optional<PanacheEntityBase> byIdOptional = Ticket.findByIdOptional(ticket.getId());
+            if (!byIdOptional.isPresent()){
+                log.info("--- TicketId: " + ticket.getId() + " nao encontrado!");
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     @Transactional
     private OrderDTO restauraTicket(OrderDTO orderDTO) {
         try {
