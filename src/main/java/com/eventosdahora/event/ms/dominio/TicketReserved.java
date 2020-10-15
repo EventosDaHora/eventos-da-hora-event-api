@@ -41,13 +41,13 @@ public class TicketReserved extends PanacheEntity {
             = " SELECT tr FROM TicketReserved tr"
             + " JOIN tr.ticket t"
             + " WHERE t.id = :id"
-            + " AND orderId = :orderId"
+            + " AND tr.orderId = :orderId"
             + " AND tr.confirmed = :isConfirmed"
             + " AND :hoje <= tr.expirationDate";
 
     public static Long findQtdAvailableTickets(Long ticketId, Long orderId) {
         return find(SQL_AVAILABLE, with("id", ticketId)
-                    .and("hoje", LocalDate.now())
+                    .and("hoje", LocalDateTime.now())
                     .and("orderId", orderId)
                     .and("isConfirmed", false)).count();
     }
