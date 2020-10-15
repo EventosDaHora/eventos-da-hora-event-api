@@ -1,7 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-config
+  name: kafka-config
+data:
+  KAFKA_BOOTSTRAP_SERVER: kafka
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
   labels:
     app: postgres
 data:
@@ -52,6 +59,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  labels:
+    app: postgres
 spec:
   replicas: 1
   selector:
@@ -73,12 +82,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_DB
-                  name: postgres-config
+                  name: app-config
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_USER
-                  name: postgres-config
+                  name: app-config
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
