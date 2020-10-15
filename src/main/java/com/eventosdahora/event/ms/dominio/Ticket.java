@@ -1,11 +1,17 @@
 package com.eventosdahora.event.ms.dominio;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import static io.quarkus.panache.common.Parameters.with;
 
 @Builder
 @NoArgsConstructor
@@ -22,4 +28,5 @@ public class Ticket extends PanacheEntity {
 
     @Column(name = "qt_ticket_initial")
     public Long qtdInicial;
+    
 }

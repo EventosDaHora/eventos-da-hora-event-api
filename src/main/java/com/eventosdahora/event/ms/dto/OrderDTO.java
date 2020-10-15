@@ -3,6 +3,7 @@ package com.eventosdahora.event.ms.dto;
 import com.eventosdahora.event.ms.kafka.OrderEvent;
 import com.eventosdahora.event.ms.kafka.OrderState;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDTO {
 	
 	public static final String IDENTIFICADOR = "ID_PEDIDO";
