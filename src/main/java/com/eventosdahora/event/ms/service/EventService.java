@@ -32,7 +32,7 @@ public class EventService {
 			return restauraTicket(orderDTO);
 		}
 		
-		throw new Exception("Estado inválido");
+		throw new Exception("--- Invalid event: " + orderDTO.getOrderEvent());
 	}
 	
 	@Transactional
@@ -80,10 +80,8 @@ public class EventService {
 	private boolean isExistTickets(final List<TicketDTO> tickets) {
 		
 		for (TicketDTO ticket : tickets) {
-			log.info("--- Procurando TicketId: " + ticket.getId());
 			Optional<PanacheEntityBase> byIdOptional = Ticket.findByIdOptional(ticket.getId());
 			if (!byIdOptional.isPresent()) {
-				log.info("--- TicketId: " + ticket.getId() + " nao encontrado!");
 				return false;
 			}
 		}
