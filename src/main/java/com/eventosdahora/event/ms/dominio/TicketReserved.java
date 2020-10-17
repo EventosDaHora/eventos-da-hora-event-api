@@ -1,11 +1,14 @@
 package com.eventosdahora.event.ms.dominio;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.panache.common.Parameters;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,14 +23,16 @@ public class TicketReserved extends PanacheEntity {
 
     @Column(name = "id_ticket_reserved")
     public Long id;
-
+    
+    @JsonbTransient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ticket")
     public Ticket ticket;
 
     @Column(name = "qtd_tickets_reserved")
     public Long qtdTicketsReserved;
-
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "dt_expired")
     public LocalDateTime expirationDate;
 

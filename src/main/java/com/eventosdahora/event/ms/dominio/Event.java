@@ -3,11 +3,14 @@ package com.eventosdahora.event.ms.dominio;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +39,8 @@ public class Event extends PanacheEntity {
 
     @Embedded
     public Localization localization;
-
-
+    
+    @OneToMany(targetEntity = Section.class, mappedBy = "event", cascade = CascadeType.PERSIST)
+    public List<Section> sections;
+    
 }

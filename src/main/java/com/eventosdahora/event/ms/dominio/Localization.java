@@ -1,8 +1,17 @@
 package com.eventosdahora.event.ms.dominio;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Embeddable
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Localization {
 
     @Column(name = "nm_localization")
