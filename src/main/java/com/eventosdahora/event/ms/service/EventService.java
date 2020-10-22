@@ -91,15 +91,16 @@ public class EventService {
 	
 	@Transactional
 	private OrderDTO restauraTicket(OrderDTO orderDTO) {
-		try {
-			orderDTO.getTickets().forEach(
-					ticketDTO -> TicketReserved.resturaTicket(ticketDTO.getId(), orderDTO.getOrderId()));
-			orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_APROVADO);
-		} catch (PersistenceException pe) {
-			orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_NEGADO);
-			log.info("--- Reply channel: " + orderDTO);
-			return orderDTO;
-		}
+//		try {
+//			orderDTO.getTickets().forEach(
+//					ticketDTO -> TicketReserved.resturaTicket(ticketDTO.getId(), orderDTO.getOrderId()));
+//			orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_APROVADO);
+//		} catch (PersistenceException pe) {
+//			orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_NEGADO);
+//			log.info("--- Reply channel: " + orderDTO);
+//			return orderDTO;
+//		}
+		orderDTO.setOrderEvent(OrderEvent.TICKET_RESTAURADO_APROVADO);
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}

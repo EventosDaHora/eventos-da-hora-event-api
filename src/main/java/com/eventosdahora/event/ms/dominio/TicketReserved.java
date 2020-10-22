@@ -12,6 +12,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static io.quarkus.panache.common.Parameters.with;
 
@@ -66,12 +67,16 @@ public class TicketReserved extends PanacheEntity {
     }
 
     public static void resturaTicket(Long ticketId, Long orderId) {
-       TicketReserved.delete("WHERE orderId = :orderId AND ticket.id = :ticketId",
+       TicketReserved.delete("orderId = :orderId AND ticket.id = :ticketId",
                parameters(ticketId, orderId));
     }
 
     private static Parameters parameters(Long ticketId, Long orderId) {
         return with("orderId", orderId).and("ticketId", ticketId);
+    }
+    
+    public static List<TicketReserved> findAllTicketReservedByOrderId(Long orderId){
+        return find("orderId", orderId).list();
     }
 
 }

@@ -7,25 +7,25 @@ import lombok.extern.java.Log;
 import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.control.ActivateRequestContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @Log
 @ApplicationScoped
-public class TicketKafkaHandler {
+public class TicketKafkaRollbackHandler {
 	
 	@Inject
 	EventService eventService;
 	
-	@Incoming("tickets")
+	@Incoming("tickets-rollback")
 	@Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
 	@Outgoing("envia-resposta")
 	@Blocking
 	@Transactional
-	public OrderDTO processor(OrderDTO orderDTO) throws Exception {
-		log.info("Pedido que chegou do tópico 'executa-reserva-tickets': " + orderDTO);
+	public OrderDTO rollback(OrderDTO orderDTO) throws Exception {
+		log.info("Pedido que chegou do tópico 'executa-reserva-ticket-rollback': " + orderDTO);
 		return eventService.handleOrder(orderDTO);
 	}
 }
