@@ -2,6 +2,7 @@ package com.eventosdahora.event.ms.resource;
 
 import com.eventosdahora.event.ms.dominio.Event;
 import com.eventosdahora.event.ms.dominio.Section;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.extern.java.Log;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
@@ -27,10 +28,10 @@ public class EventResource {
 	@GET
 	@Path("/{eventId}")
 	public Response getSectionById(@PathParam Long eventId) {
-		Optional<Event> optional = Event.findByIdOptional(eventId);
+		Event event = Event.findById(eventId);
 		
-		if (optional.isPresent()) {
-			return Response.ok(optional.get()).build();
+		if (event != null) {
+			return Response.ok(event).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND.getStatusCode(), "eventId not found").build();
 		}

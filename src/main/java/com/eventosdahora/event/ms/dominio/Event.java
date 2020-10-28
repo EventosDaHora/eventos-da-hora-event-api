@@ -43,4 +43,7 @@ public class Event extends PanacheEntity {
     @OneToMany(targetEntity = Section.class, mappedBy = "event", cascade = CascadeType.PERSIST)
     public List<Section> sections;
     
+    @OneToMany(targetEntity = ImageEvent.class, mappedBy = "event", cascade = CascadeType.PERSIST)
+    public List<ImageEvent> images;
+    
 }

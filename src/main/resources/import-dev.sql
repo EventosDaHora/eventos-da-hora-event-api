@@ -7,6 +7,15 @@ VALUES (2, 'Categoria de Arte', 'Arte');
 INSERT INTO category(id, ds_categoria, nm_category)
 VALUES (3, 'Categoria de Teatro', 'Teatro');
 
+INSERT INTO category(id, ds_categoria, nm_category)
+VALUES (4, 'Categoria de Shows', 'Show');
+
+INSERT INTO category(id, ds_categoria, nm_category)
+VALUES (5, 'Categoria de Esportes', 'Esporte');
+
+INSERT INTO category(id, ds_categoria, nm_category)
+VALUES (6, 'Categoria de Cinemas', 'Cinema');
+
 
 
 INSERT INTO public.country(id, ds_country) VALUES (1, 'BRASIL');

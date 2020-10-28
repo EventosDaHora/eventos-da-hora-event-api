@@ -23,5 +23,5 @@ public class Category extends PanacheEntity {
     public String name;
 
     @Column(name = "ds_categoria", nullable = false)
-    public String categoria;
+    public String description;
 }
