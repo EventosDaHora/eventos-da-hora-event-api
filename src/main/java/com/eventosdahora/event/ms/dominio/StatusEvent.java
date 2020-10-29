@@ -4,6 +4,7 @@ import com.eventosdahora.event.ms.kafka.OrderState;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +24,6 @@ public class StatusEvent extends PanacheEntity {
 
     @Column(name = "ds_status_event")
     @Enumerated(EnumType.STRING)
-    public OrderState orderState;
-
+    public StatusEventEnum statusEvent;
+    
 }

@@ -1,5 +1,8 @@
 package com.eventosdahora.event.ms.kafka;
 
+import lombok.Getter;
+
+@Getter
 public enum OrderEvent {
     RESERVAR_TICKET, RESERVA_TICKET_APROVADO, RESERVA_TICKET_NEGADO,
     CONSOLIDAR_COMPRA, CONSOLIDACAO_COMPRA_APROVADO,

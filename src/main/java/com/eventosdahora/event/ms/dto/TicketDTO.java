@@ -11,8 +11,7 @@ import lombok.*;
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TicketDTO {
-
+    
     private Long id;
-
-    private Long ammount;
+    private Long quantity;
 }

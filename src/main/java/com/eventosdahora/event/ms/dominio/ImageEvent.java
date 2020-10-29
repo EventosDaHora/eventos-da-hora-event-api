@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Builder
@@ -15,11 +16,12 @@ public class ImageEvent extends PanacheEntity {
 
     @Column(name = "id_image_event")
     public Long id;
-
+    
+    @JsonbTransient
     @JoinColumn(name = "id_event")
     @ManyToOne(fetch = FetchType.LAZY)
     public Event event;
-
+    
     @Column(name = "id_image")
     public Long imageId;
 

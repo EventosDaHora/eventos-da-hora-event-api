@@ -34,6 +34,7 @@ public class OrderDTO {
 	private BigDecimal fees;
 	
 	private Long userId;
+	private String emailNotification;
 	
 	@Builder.Default
 	private List<TicketDTO> tickets = new ArrayList<>();
