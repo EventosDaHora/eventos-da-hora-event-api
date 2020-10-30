@@ -22,11 +22,11 @@ public class Event extends PanacheEntity {
 
     @JoinColumn(name = "id_category")
     @ManyToOne(fetch = FetchType.LAZY)
-    public Category categoryId;
+    public Category category;
 
     @JoinColumn(name = "id_status_event")
     @ManyToOne(fetch = FetchType.LAZY)
-    public StatusEvent statusId;
+    public StatusEvent status;
 
     @Column(name = "nm_event")
     public String name;

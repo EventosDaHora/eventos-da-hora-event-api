@@ -27,10 +27,10 @@ public class Section extends PanacheEntity {
     public Event event;
 
     @Column(name = "nm_section")
-    public String nome;
+    public String name;
 
     @Column(name = "ds_section", length = 500)
-    public String descricao;
+    public String description;
 
     @Column(name = "vl_amount")
     public BigDecimal ammount;

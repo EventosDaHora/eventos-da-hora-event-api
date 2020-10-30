@@ -1,5 +1,6 @@
 package com.eventosdahora.event.ms.service;
 
+import com.eventosdahora.event.ms.dominio.Event;
 import com.eventosdahora.event.ms.dominio.Ticket;
 import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.dto.OrderDTO;
@@ -9,11 +10,12 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Log
 @ApplicationScoped
@@ -47,7 +49,7 @@ public class EventService {
 		for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 			Long qtdAvailableTickets = TicketReserved.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
 			Ticket ticket = Ticket.findById(ticketDTO.getId());
-			qtdAvailableTickets = ticket.qtdInicial - qtdAvailableTickets;
+			qtdAvailableTickets = ticket.initialQuantity - qtdAvailableTickets;
 			
 			if (qtdAvailableTickets <= ticketDTO.getQuantity()) {
 				orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
@@ -112,5 +114,11 @@ public class EventService {
 		orderDTO.setOrderEvent(OrderEvent.CONSOLIDACAO_COMPRA_APROVADO);
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
+	}
+	
+	public Event getRandomEvent() {
+		Random random = new Random();
+		Integer randomNumber = random.nextInt(Event.listAll().size())+1;
+		return Event.findById(Long.valueOf(randomNumber.toString()));
 	}
 }

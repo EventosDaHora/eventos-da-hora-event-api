@@ -18,12 +18,12 @@ public class ImageEvent extends PanacheEntity {
     public Long id;
     
     @JsonbTransient
-    @JoinColumn(name = "id_event")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_event")
     public Event event;
     
     @Column(name = "id_image")
-    public Long imageId;
+    public String imageId;
 
     @Column(name = "ds_image_type")
     public String imageType;
