@@ -24,10 +24,10 @@ public class Localization {
     public String address;
 
     @Column(name = "ds_complemento", nullable = false)
-    public String complemento;
+    public String complement;
 
     @Column(name = "nu_address", length = 10, nullable = false)
-    public String numero;
+    public String number;
 
     @JoinColumn(name = "id_country")
     @ManyToOne

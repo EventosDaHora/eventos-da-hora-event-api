@@ -20,5 +20,5 @@ public class City extends PanacheEntity {
     public Long id;
 
     @Column(name = "ds_city")
-    public String descricao;
+    public String description;
 }

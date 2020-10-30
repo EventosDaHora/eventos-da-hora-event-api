@@ -9,7 +9,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,7 +46,7 @@ public class EventService {
 		for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 			Long qtdAvailableTickets = TicketReserved.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
 			Ticket ticket = Ticket.findById(ticketDTO.getId());
-			qtdAvailableTickets = ticket.qtdInicial - qtdAvailableTickets;
+			qtdAvailableTickets = ticket.initialQuantity - qtdAvailableTickets;
 			
 			if (qtdAvailableTickets <= ticketDTO.getQuantity()) {
 				orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);

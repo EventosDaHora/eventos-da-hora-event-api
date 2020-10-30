@@ -20,5 +20,5 @@ public class Country extends PanacheEntity {
     public Long id;
 
     @Column(name = "ds_country")
-    public String descricao;
+    public String description;
 }
