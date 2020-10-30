@@ -1,5 +1,6 @@
 package com.eventosdahora.event.ms.service;
 
+import com.eventosdahora.event.ms.dominio.Event;
 import com.eventosdahora.event.ms.dominio.Ticket;
 import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.dto.OrderDTO;
@@ -11,8 +12,10 @@ import lombok.extern.java.Log;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Log
 @ApplicationScoped
@@ -111,5 +114,11 @@ public class EventService {
 		orderDTO.setOrderEvent(OrderEvent.CONSOLIDACAO_COMPRA_APROVADO);
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
+	}
+	
+	public Event getRandomEvent() {
+		Random random = new Random();
+		Integer randomNumber = random.nextInt(Event.listAll().size())+1;
+		return Event.findById(Long.valueOf(randomNumber.toString()));
 	}
 }

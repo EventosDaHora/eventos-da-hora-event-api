@@ -73,8 +73,8 @@ INSERT INTO public.event(id, dt_event, ds_event, ds_address, cep, ds_complemento
 VALUES (3, current_date + 22, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Mineirao',
         12, 'Tributo ao Mamonas Assasinas ', 4, 3, 1, 1);
 
-INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (5, '7ca11856-ff15-4cd6-b67e-7994fe7ba9e8', 'THUMBNAIL', 2);
-INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (6, 'd9a048bd-12f1-43cd-b601-d2e6ba784a84', 'BANNER', 2);
+INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (5, '7ca11856-ff15-4cd6-b67e-7994fe7ba9e8', 'THUMBNAIL', 3);
+INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (6, 'd9a048bd-12f1-43cd-b601-d2e6ba784a84', 'BANNER', 3);
 
 
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)

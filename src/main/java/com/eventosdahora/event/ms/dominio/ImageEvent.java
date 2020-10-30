@@ -23,7 +23,7 @@ public class ImageEvent extends PanacheEntity {
     public Event event;
     
     @Column(name = "id_image")
-    public Long imageId;
+    public String imageId;
 
     @Column(name = "ds_image_type")
     public String imageType;
