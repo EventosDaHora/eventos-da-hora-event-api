@@ -26,7 +26,7 @@ INSERT INTO public.statusevent(id, ds_status_event) VALUES (2, 'CANCELADO');
 
 
 -- INSERT de EVENTO KISS--
-INSERT INTO public.event(id, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
+INSERT INTO public.event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
                          id_category, id_city, id_country, id_status_event)
 VALUES (1, current_date + 11, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Estadio Mane Garrincha',
         12, 'KISS - END OF THE ROAD', 4, 1, 1, 1);
@@ -46,7 +46,7 @@ INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (2, 50, 2);
 
 
 -- INSERT de EVENTO AC/DC--
-INSERT INTO public.event(id, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
+INSERT INTO public.event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
                          id_category, id_city, id_country, id_status_event)
 VALUES (2, current_date + 3 + 1, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Pacaembu',
         12, 'AC/DC - LOST IN HELL', 4, 2, 1, 1);
@@ -68,7 +68,7 @@ INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (5, 100, 5);
 
 
 -- INSERT de EVENTO --
-INSERT INTO public.event(id, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
+INSERT INTO public.event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address, nm_event,
                          id_category, id_city, id_country, id_status_event)
 VALUES (3, current_date + 22, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Mineirao',
         12, 'Tributo ao Mamonas Assasinas ', 4, 3, 1, 1);

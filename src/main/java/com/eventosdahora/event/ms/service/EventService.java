@@ -6,10 +6,12 @@ import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.dto.OrderDTO;
 import com.eventosdahora.event.ms.dto.TicketDTO;
 import com.eventosdahora.event.ms.kafka.OrderEvent;
+import com.eventosdahora.event.ms.repository.EventRepository;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -20,6 +22,9 @@ import java.util.Random;
 @Log
 @ApplicationScoped
 public class EventService {
+	
+	@Inject
+	private EventRepository eventRepository;
 	
 	public OrderDTO handleOrder(OrderDTO orderDTO) throws Exception {
 		if (OrderEvent.RESERVAR_TICKET.equals(orderDTO.getOrderEvent())) {
@@ -118,7 +123,16 @@ public class EventService {
 	
 	public Event getRandomEvent() {
 		Random random = new Random();
-		Integer randomNumber = random.nextInt(Event.listAll().size())+1;
-		return Event.findById(Long.valueOf(randomNumber.toString()));
+		int totalEvents = Integer.parseInt(Long.valueOf(eventRepository.count()).toString()) + 1;
+		int randomNumber = random.nextInt(totalEvents);
+		return eventRepository.findById((long) randomNumber);
+	}
+	
+	public Optional<Event> findById(final Long eventId) {
+		return eventRepository.findByIdOptional(eventId);
+	}
+	
+	public List<Event> listAll() {
+		return eventRepository.listAll();
 	}
 }
