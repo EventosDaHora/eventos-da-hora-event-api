@@ -36,9 +36,9 @@ INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (2, 
 
 
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (1, 100.20, 'Arquibancada muito top', null, 'ARQUIBANCADA', 1);
+VALUES (1, 130, 'Arquibancada muito top', null, 'ARQUIBANCADA', 1);
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (2, 500.20, 'Camarote muito top', null, 'CAMAROTE', 1);
+VALUES (2, 500, 'Camarote muito top', null, 'CAMAROTE', 1);
 
 
 INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (1, 100, 1);
@@ -56,11 +56,11 @@ INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (4, 
 
 
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (3, 100.20, 'Arquibancada muito top', null, 'ARQUIBANCADA', 2);
+VALUES (3, 80, 'Arquibancada muito top', null, 'ARQUIBANCADA', 2);
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (4, 500.20, 'Camarote muito top', null, 'CAMAROTE', 2);
+VALUES (4, 250, 'Camarote muito top', null, 'CAMAROTE', 2);
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (5, 500.20, 'Pista muito top', null, 'PISTA', 2);
+VALUES (5, 30, 'Pista muito top', null, 'PISTA', 2);
 
 INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (3, 100, 3);
 INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (4, 50, 4);
@@ -78,11 +78,11 @@ INSERT INTO public.imageevent(id, id_image, ds_image_type, id_event) VALUES (6, 
 
 
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (6, 100.20, 'Arquibancada muito top', null, 'ARQUIBANCADA', 3);
+VALUES (6, 70, 'Arquibancada muito top', null, 'ARQUIBANCADA', 3);
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (7, 500.20, 'Camarote muito top', null, 'CAMAROTE', 3);
+VALUES (7, 250, 'Camarote muito top', null, 'CAMAROTE', 3);
 INSERT INTO public.section(id, vl_amount, ds_section, metadata, nm_section, id_event)
-VALUES (8, 500.20, 'Pista muito top', null, 'PISTA', 3);
+VALUES (8, 30, 'Pista muito top', null, 'PISTA', 3);
 
 INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (6, 100, 6);
 INSERT INTO public.ticket(id, qt_ticket_initial, id_section) VALUES (7, 50, 7);
