@@ -1,10 +1,7 @@
 package com.eventosdahora.event.ms.resource;
 
-import com.eventosdahora.event.ms.dominio.Event;
-import com.eventosdahora.event.ms.dominio.Section;
 import com.eventosdahora.event.ms.service.CategoryService;
 import lombok.extern.java.Log;
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -13,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Optional;
 
 @Log
 @Path("/categories")

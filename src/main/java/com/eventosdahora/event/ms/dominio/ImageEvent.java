@@ -1,6 +1,5 @@
 package com.eventosdahora.event.ms.dominio;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -12,19 +11,23 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ImageEvent extends PanacheEntity {
-
-    @Column(name = "id_image_event")
-    public Long id;
-    
-    @JsonbTransient
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_event")
-    public Event event;
-    
-    @Column(name = "id_image")
-    public String imageId;
-
-    @Column(name = "ds_image_type")
-    public String imageType;
+@Table(name = "tb_image_event")
+public class ImageEvent {
+	
+	@Id
+	@SequenceGenerator(name = "seq_image_event", sequenceName = "seq_image_event", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_image_event")
+	@Column(name = "id_image_event")
+	public Long id;
+	
+	@JsonbTransient
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_event")
+	public Event event;
+	
+	@Column(name = "id_image")
+	public String imageId;
+	
+	@Column(name = "ds_image_type")
+	public String imageType;
 }

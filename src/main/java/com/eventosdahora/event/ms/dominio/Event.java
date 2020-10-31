@@ -1,6 +1,5 @@
 package com.eventosdahora.event.ms.dominio;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="tb_event")
 public class Event {
     
     @Id

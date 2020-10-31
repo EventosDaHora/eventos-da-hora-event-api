@@ -1,10 +1,8 @@
 package com.eventosdahora.event.ms.resource;
 
 import com.eventosdahora.event.ms.dominio.Event;
-import com.eventosdahora.event.ms.dominio.Section;
-import com.eventosdahora.event.ms.repository.EventRepository;
 import com.eventosdahora.event.ms.service.EventService;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import com.eventosdahora.event.ms.service.SectionService;
 import lombok.extern.java.Log;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
@@ -25,7 +23,9 @@ public class EventResource {
 	
 	@Inject
 	private EventService eventService;
-
+	
+	@Inject
+	private SectionService sectionService;
 	
 	@GET
 	public Response getAll() {
@@ -64,7 +64,7 @@ public class EventResource {
 		Optional<Event> optional = eventService.findById(eventId);
 		
 		if (optional.isPresent()) {
-			return Response.ok(Section.findSectionsByEventId(eventId)).build();
+			return Response.ok(sectionService.findSectionsByEventId(eventId)).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND.getStatusCode(), "eventId not found").build();
 		}
