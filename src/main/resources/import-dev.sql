@@ -1,20 +1,22 @@
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (1, 'Categoria de Musica', 'Musica');
 
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (2, 'Categoria de Arte', 'Arte');
 
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (3, 'Categoria de Teatro', 'Teatro');
 
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (4, 'Categoria de Shows', 'Show');
 
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (5, 'Categoria de Esportes', 'Esporte');
 
-INSERT INTO category(id, ds_categoria, nm_category)
+INSERT INTO tb_category(id_category, ds_categoria, nm_category)
 VALUES (6, 'Categoria de Cinemas', 'Cinema');
+
+SELECT setval('seq_category', 6);
 
 INSERT INTO public.country(id, ds_country) VALUES (1, 'BRASIL');
 INSERT INTO public.city(id, ds_city) VALUES (1, 'Brasília');
