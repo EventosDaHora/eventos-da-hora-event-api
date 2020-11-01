@@ -9,18 +9,11 @@ import com.eventosdahora.event.ms.kafka.OrderEvent;
 import com.eventosdahora.event.ms.repository.EventRepository;
 import com.eventosdahora.event.ms.repository.TicketRepository;
 import com.eventosdahora.event.ms.repository.TicketReservedRepository;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.Uni;
-import io.smallrye.mutiny.infrastructure.Infrastructure;
-import io.vertx.mutiny.pgclient.PgPool;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
-import javax.inject.Inject;
-import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,39 +24,27 @@ import java.util.stream.Collectors;
 @Log
 @ApplicationScoped
 public class EventService {
-	
-	@Inject
-	private EventRepository eventRepository;
 
 	@Inject
-	private TicketReservedRepository ticketReservedRepository;
+	EventRepository eventRepository;
 
 	@Inject
-	private TicketRepository ticketRepository;
+	TicketReservedRepository ticketReservedRepository;
+
 	@Inject
-	PgPool client;
+	TicketRepository ticketRepository;
 
 	public OrderDTO handleOrder(OrderDTO orderDTO) throws Exception {
-
-
-
-	public Uni<OrderDTO> handleOrder(OrderDTO orderDTO) throws Exception {
 		if (OrderEvent.RESERVAR_TICKET.equals(orderDTO.getOrderEvent())) {
-			return Uni.createFrom()
-					.item(reservaTicket(orderDTO))
-					.runSubscriptionOn(Infrastructure.getDefaultWorkerPool());
+			return reservaTicket(orderDTO);
 		}
 
 		if (OrderEvent.CONSOLIDAR_COMPRA.equals(orderDTO.getOrderEvent())) {
-			return Uni.createFrom()
-                    .item(consolidaCompra(orderDTO))
-                    .runSubscriptionOn(Infrastructure.getDefaultWorkerPool());
+			return consolidaCompra(orderDTO);
 		}
 
 		if (OrderEvent.RESTAURAR_TICKET.equals(orderDTO.getOrderEvent())) {
-			return Uni.createFrom()
-                    .item(restauraTicket(orderDTO))
-                    .runSubscriptionOn(Infrastructure.getDefaultWorkerPool());
+			return restauraTicket(orderDTO);
 		}
 
 		throw new Exception("--- Invalid event: " + orderDTO.getOrderEvent());
@@ -77,19 +58,19 @@ public class EventService {
 			orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
 			return orderDTO;
 		}
-		
+
 		for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 			Long qtdAvailableTickets = ticketReservedRepository.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
 			Ticket ticket = ticketRepository.findById(ticketDTO.getId());
 			qtdAvailableTickets = ticket.initialQuantity - qtdAvailableTickets;
-			
+
 			if (qtdAvailableTickets <= ticketDTO.getQuantity()) {
 				orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
 				isOk = false;
 				break;
 			}
 		}
-		
+
 		if (isOk) {
 			for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 				Ticket ticket = ticketRepository.findById(ticketDTO.getId());
@@ -100,29 +81,22 @@ public class EventService {
 				                                              .expirationDate(LocalDateTime.now().plusHours(1))
 				                                              .ticket(ticket)
 				                                              .build();
-				
+
 				ticketReservedRepository.persist(ticketReserved);
 			}
 			orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_APROVADO);
 		}
-		
+
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	@Transactional
 	private boolean isExistTickets(final List<TicketDTO> tickets) {
-		
-		for (TicketDTO ticket : tickets) {
-			Optional<Ticket> byIdOptional = ticketRepository.findByIdOptional(ticket.getId());
-			if (!byIdOptional.isPresent()) {
-				return false;
-			}
-		}
-		
-		return true;
+		List<Long> ids = tickets.stream().map(TicketDTO::getId).collect(Collectors.toList());
+		return ticketRepository.exist(ids);
 	}
-	
+
 	@Transactional
 	private OrderDTO restauraTicket(OrderDTO orderDTO) {
 		try {
@@ -138,7 +112,7 @@ public class EventService {
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	@Transactional
 	private OrderDTO consolidaCompra(OrderDTO orderDTO) {
 		orderDTO.getTickets().forEach(
@@ -147,7 +121,7 @@ public class EventService {
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	public Event getRandomEvent() {
 		Random random = new Random();
 		int totalEvents = Integer.parseInt(Long.valueOf(eventRepository.count()).toString()) + 1;
