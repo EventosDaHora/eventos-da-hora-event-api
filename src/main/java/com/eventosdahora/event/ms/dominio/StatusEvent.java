@@ -1,24 +1,21 @@
 package com.eventosdahora.event.ms.dominio;
 
-import com.eventosdahora.event.ms.kafka.OrderState;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class StatusEvent extends PanacheEntity {
-
+@Table(name = "tb_status_event")
+public class StatusEvent{
+    
+    @Id
     @Column(name = "id_status_event")
     public Long id;
 

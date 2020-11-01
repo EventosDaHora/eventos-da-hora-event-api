@@ -1,9 +1,10 @@
 package com.eventosdahora.event.ms.resource;
 
 import com.eventosdahora.event.ms.dominio.TicketReserved;
+import com.eventosdahora.event.ms.service.TicketReservedService;
 import lombok.extern.java.Log;
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,13 +15,16 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TicketsReseverdResource {
 	
+	@Inject
+	private TicketReservedService ticketReservedService;
+	
 	@GET
 	public Response getSectionsByIdEvent(@QueryParam("orderId") Long orderId) {
 		
 		if (orderId != null) {
-			return Response.ok(TicketReserved.findAllTicketReservedByOrderId(orderId)).build();
+			return Response.ok(ticketReservedService.findAllTicketReservedByOrderId(orderId)).build();
 		} else {
-			return Response.ok(TicketReserved.listAll()).build();
+			return Response.ok(ticketReservedService.listAll()).build();
 		}
 	}
 	

@@ -1,6 +1,5 @@
 package com.eventosdahora.event.ms.dominio;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Event extends PanacheEntity {
-
+@Table(name="tb_event")
+public class Event {
+    
+    @Id
+    @SequenceGenerator(name = "seq_event", sequenceName = "seq_event", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_event")
     @Column(name = "id_event", length = 19)
     public Long id;
 

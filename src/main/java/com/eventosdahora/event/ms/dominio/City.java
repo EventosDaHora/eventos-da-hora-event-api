@@ -1,21 +1,23 @@
 package com.eventosdahora.event.ms.dominio;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class City extends PanacheEntity {
-
+@Table(name="tb_city")
+public class City {
+    
+    @Id
+    @SequenceGenerator(name = "seq_city", sequenceName = "seq_city", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_city")
     @Column(name = "id_city")
     public Long id;
 
