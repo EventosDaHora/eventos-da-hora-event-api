@@ -23,7 +23,7 @@ import java.util.Optional;
 public class EventResource {
 	
 	@Inject
-	private EventService eventService;
+	EventService eventService;
 	
 	@GET
 	public Response getAll() {

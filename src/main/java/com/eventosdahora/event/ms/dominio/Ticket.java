@@ -28,5 +28,6 @@ public class Ticket extends PanacheEntity {
 	
 	@OneToMany(targetEntity = TicketReserved.class, mappedBy = "ticket", cascade = CascadeType.PERSIST)
 	public List<TicketReserved> ticketReserved;
-	
+
+
 }

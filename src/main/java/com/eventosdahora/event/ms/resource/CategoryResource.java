@@ -22,7 +22,7 @@ import java.util.Optional;
 public class CategoryResource {
 	
 	@Inject
-	public CategoryService categoryService;
+	CategoryService categoryService;
 	
 	@GET
 	public Response getAll() {
