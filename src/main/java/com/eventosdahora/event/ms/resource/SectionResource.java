@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Log
-@Path("/section")
+@Path("/sections")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SectionResource {
