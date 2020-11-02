@@ -1,5 +1,6 @@
 package com.eventosdahora.event.ms.dto;
 
+import com.eventosdahora.event.ms.dominio.ImageEvent;
 import lombok.*;
 
 @Data
@@ -9,9 +10,14 @@ import lombok.*;
 @AllArgsConstructor
 public class ImageEventDTO {
 	
-	private Long id;
-	
 	private String imageId;
 	
 	private String imageType;
+
+	public ImageEvent toEntity() {
+		return ImageEvent.builder()
+				.imageId(imageId)
+				.imageType(imageType)
+				.build();
+	}
 }
