@@ -18,4 +18,8 @@ public class SectionService {
 	public List<Section> findSectionsByEventId(Long eventId) {
 		return sectionRepository.findSectionsByEventId(eventId);
 	}
+
+	public Section findById(Long sectionId) {
+		return sectionRepository.findById(sectionId);
+	}
 }

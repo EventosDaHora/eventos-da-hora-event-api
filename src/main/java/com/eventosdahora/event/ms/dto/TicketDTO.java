@@ -1,17 +1,23 @@
 package com.eventosdahora.event.ms.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import com.eventosdahora.event.ms.dominio.Ticket;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TicketDTO {
     
     private Long id;
     private Long quantity;
+
+    public Ticket toEntity() {
+        return Ticket.builder()
+                .initialQuantity(quantity)
+                .build();
+    }
 }

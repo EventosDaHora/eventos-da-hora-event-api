@@ -1,7 +1,7 @@
 package com.eventosdahora.event.ms.kafka;
 
 import com.eventosdahora.event.ms.dto.OrderDTO;
-import com.eventosdahora.event.ms.service.EventService;
+import com.eventosdahora.event.ms.service.EventKafkaService;
 import io.smallrye.reactive.messaging.annotations.Blocking;
 import lombok.extern.java.Log;
 import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 public class TicketKafkaHandler {
 	
 	@Inject
-	EventService eventService;
+	EventKafkaService eventKafkaService;
 	
 	@Incoming("tickets")
 	@Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
@@ -26,7 +26,7 @@ public class TicketKafkaHandler {
 	@Transactional
 	public OrderDTO processor(OrderDTO orderDTO) throws Exception {
 		log.info("Pedido que chegou do tópico 'executa-reserva-tickets': " + orderDTO);
-		return eventService.handleOrder(orderDTO);
+		return eventKafkaService.handleOrder(orderDTO);
 	}
 
 

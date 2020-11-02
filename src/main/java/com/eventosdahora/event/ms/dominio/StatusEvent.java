@@ -17,10 +17,10 @@ public class StatusEvent{
     
     @Id
     @Column(name = "id_status_event")
-    public Long id;
+    private Long id;
 
     @Column(name = "ds_status_event")
     @Enumerated(EnumType.STRING)
-    public StatusEventEnum statusEvent;
+    private StatusEventEnum statusEvent;
     
 }

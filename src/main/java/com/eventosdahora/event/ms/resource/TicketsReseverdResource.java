@@ -1,6 +1,5 @@
 package com.eventosdahora.event.ms.resource;
 
-import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.service.TicketReservedService;
 import lombok.extern.java.Log;
 

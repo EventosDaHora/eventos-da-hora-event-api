@@ -1,13 +1,13 @@
 package com.eventosdahora.event.ms.dominio;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
+@Data
 @Builder
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,16 +18,16 @@ public class ImageEvent {
 	@SequenceGenerator(name = "seq_image_event", sequenceName = "seq_image_event", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_image_event")
 	@Column(name = "id_image_event")
-	public Long id;
+	private Long id;
 	
 	@JsonbTransient
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_event")
-	public Event event;
+	private Event event;
 	
 	@Column(name = "id_image")
-	public String imageId;
+	private String imageId;
 	
 	@Column(name = "ds_image_type")
-	public String imageType;
+	private String imageType;
 }

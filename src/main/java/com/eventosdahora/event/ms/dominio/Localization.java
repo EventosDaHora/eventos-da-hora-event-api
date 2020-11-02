@@ -15,25 +15,25 @@ import javax.persistence.*;
 public class Localization {
 
     @Column(name = "nm_localization")
-    public String localization;
+    private String localization;
 
     @Column(name = "cep", length = 10, nullable = false)
-    public String cep;
+    private String cep;
 
     @Column(name = "ds_address", nullable = false)
-    public String address;
+    private String address;
 
     @Column(name = "ds_complemento", nullable = false)
-    public String complement;
+    private String complement;
 
     @Column(name = "nu_address", length = 10, nullable = false)
-    public String number;
+    private String number;
 
     @JoinColumn(name = "id_country")
     @ManyToOne
-    public Country country;
+    private Country country;
 
     @JoinColumn(name = "id_city")
     @ManyToOne(fetch = FetchType.LAZY)
-    public City city;
+    private City city;
 }
