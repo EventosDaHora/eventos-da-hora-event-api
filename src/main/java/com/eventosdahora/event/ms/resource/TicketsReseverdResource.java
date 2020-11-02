@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class TicketsReseverdResource {
 	
 	@Inject
-	private TicketReservedService ticketReservedService;
+	TicketReservedService ticketReservedService;
 	
 	@GET
 	public Response getSectionsByIdEvent(@QueryParam("orderId") Long orderId) {
@@ -23,7 +23,7 @@ public class TicketsReseverdResource {
 		if (orderId != null) {
 			return Response.ok(ticketReservedService.findAllTicketReservedByOrderId(orderId)).build();
 		} else {
-			return Response.ok(ticketReservedService.listAll()).build();
+			return Response.ok(ticketReservedService.findAll()).build();
 		}
 	}
 	

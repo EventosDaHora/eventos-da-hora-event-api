@@ -2,6 +2,7 @@ package com.eventosdahora.event.ms.service;
 
 import com.eventosdahora.event.ms.dominio.Section;
 import com.eventosdahora.event.ms.repository.SectionRepository;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,16 +11,17 @@ import java.util.List;
 
 @Log
 @ApplicationScoped
-public class SectionService {
+public class SectionService extends GenericService<Section> {
 	
 	@Inject
-	private SectionRepository sectionRepository;
+	SectionRepository sectionRepository;
 	
 	public List<Section> findSectionsByEventId(Long eventId) {
 		return sectionRepository.findSectionsByEventId(eventId);
 	}
 
-	public Section findById(Long sectionId) {
-		return sectionRepository.findById(sectionId);
+	@Override
+	public PanacheRepository<Section> getRepository() {
+		return sectionRepository;
 	}
 }

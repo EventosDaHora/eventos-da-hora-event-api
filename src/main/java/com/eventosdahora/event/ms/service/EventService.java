@@ -1,55 +1,67 @@
 package com.eventosdahora.event.ms.service;
 
 import com.eventosdahora.event.ms.dominio.Event;
-import com.eventosdahora.event.ms.dominio.Ticket;
+import com.eventosdahora.event.ms.dominio.Section;
 import com.eventosdahora.event.ms.dto.EventDTO;
 import com.eventosdahora.event.ms.dto.SectionDTO;
+import com.eventosdahora.event.ms.dto.TicketDTO;
 import com.eventosdahora.event.ms.repository.EventRepository;
-import com.eventosdahora.event.ms.repository.SectionRepository;
-import com.eventosdahora.event.ms.repository.TicketRepository;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Log
 @ApplicationScoped
-public class EventService {
+public class EventService extends GenericService<Event> {
 
-	@Inject
-	EventRepository repository;
+    @Inject
+    EventRepository repository;
 
-	@Inject
-	SectionService sectionService;
+    @Inject
+    CategoryService categoryService;
 
-	@Inject
-	ImageService imageService;
+    @Inject
+    SectionService sectionService;
 
-	public Event getRandomEvent() {
-		Random random = new Random();
-		int totalEvents = Integer.parseInt(Long.valueOf(repository.count()).toString()) + 1;
-		int randomNumber = random.nextInt(totalEvents);
-		return repository.findById((long) randomNumber);
-	}
+    @Inject
+    ImageService imageService;
 
-	public Optional<Event> findById(final Long eventId) {
-		return repository.findByIdOptional(eventId);
-	}
+    public Optional<Event> getRandomEvent() {
+        Random random = new Random();
+        int totalEvents = Integer.parseInt(Long.valueOf(repository.count()).toString()) + 1;
+        int randomNumber = random.nextInt(totalEvents);
+        return repository.findByIdOptional((long) randomNumber);
+    }
 
-	public List<Event> listAll() {
-		return repository.listAll();
-	}
+    @Transactional
+    public Event newEvent(EventDTO eventDTO) {
+        Event event = eventDTO.toEntity();
+        event.setCategory(categoryService.findById(eventDTO.getIdCategory()));
 
-	public void newEvent(EventDTO eventDTO) {
-		Event event = eventDTO.toEntity();
+        eventDTO.getSections()
+                .stream()
+                .map(sectionDTO -> {
+                    Section section = sectionDTO.toEntity();
+                    sectionDTO.getTickets()
+                            .stream()
+                            .map(TicketDTO::toEntity)
+                            .forEach(section::addTicket);
+                    return section;
+                })
+                .forEach(event::addSection);
+        repository.persistAndFlush(event);
+        return event;
+    }
 
-		eventDTO.getSections()
-				.stream()
-				.map(SectionDTO::toEntity)
-				.forEach(event::addSection);
-
-	}
+    @Override
+    public PanacheRepository<Event> getRepository() {
+        return repository;
+    }
 }

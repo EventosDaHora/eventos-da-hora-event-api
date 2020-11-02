@@ -2,6 +2,7 @@ package com.eventosdahora.event.ms.service;
 
 import com.eventosdahora.event.ms.dominio.TicketReserved;
 import com.eventosdahora.event.ms.repository.TicketReservedRepository;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,16 +11,17 @@ import java.util.List;
 
 @Log
 @ApplicationScoped
-public class TicketReservedService {
+public class TicketReservedService extends GenericService<TicketReserved> {
 	
 	@Inject
-	private TicketReservedRepository ticketReservedRepository;
+	TicketReservedRepository ticketReservedRepository;
 	
 	public List<TicketReserved> findAllTicketReservedByOrderId(Long orderId){
 		return ticketReservedRepository.findAllTicketReservedByOrderId(orderId);
 	}
-	
-	public List<TicketReserved> listAll(){
-		return ticketReservedRepository.listAll();
+
+	@Override
+	public PanacheRepository<TicketReserved> getRepository() {
+		return ticketReservedRepository;
 	}
 }

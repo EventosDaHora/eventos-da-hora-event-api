@@ -21,9 +21,7 @@ public class CategoryResource {
 	CategoryService categoryService;
 	
 	@GET
-	public Response getAll() {
-		return Response.ok(categoryService.getAll()).build();
+	public Response findAll() {
+		return Response.ok(categoryService.findAll()).build();
 	}
-	
-	
 }
