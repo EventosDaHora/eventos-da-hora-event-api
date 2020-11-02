@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 public class CategoryResource {
 	
 	@Inject
-	public CategoryService categoryService;
+	CategoryService categoryService;
 	
 	@GET
 	public Response getAll() {

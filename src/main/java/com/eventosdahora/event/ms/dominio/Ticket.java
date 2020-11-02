@@ -31,5 +31,6 @@ public class Ticket {
 	
 	@OneToMany(targetEntity = TicketReserved.class, mappedBy = "ticket", cascade = CascadeType.PERSIST)
 	public List<TicketReserved> ticketReserved;
-	
+
+
 }

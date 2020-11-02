@@ -19,57 +19,58 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Log
 @ApplicationScoped
 public class EventService {
-	
+
 	@Inject
-	private EventRepository eventRepository;
-	
+	EventRepository eventRepository;
+
 	@Inject
-	private TicketReservedRepository ticketReservedRepository;
-	
+	TicketReservedRepository ticketReservedRepository;
+
 	@Inject
-	private TicketRepository ticketRepository;
-	
+	TicketRepository ticketRepository;
+
 	public OrderDTO handleOrder(OrderDTO orderDTO) throws Exception {
 		if (OrderEvent.RESERVAR_TICKET.equals(orderDTO.getOrderEvent())) {
 			return reservaTicket(orderDTO);
 		}
-		
+
 		if (OrderEvent.CONSOLIDAR_COMPRA.equals(orderDTO.getOrderEvent())) {
 			return consolidaCompra(orderDTO);
 		}
-		
+
 		if (OrderEvent.RESTAURAR_TICKET.equals(orderDTO.getOrderEvent())) {
 			return restauraTicket(orderDTO);
 		}
-		
+
 		throw new Exception("--- Invalid event: " + orderDTO.getOrderEvent());
 	}
-	
+
 	@Transactional
 	private OrderDTO reservaTicket(OrderDTO orderDTO) {
 		boolean isOk = true;
-		
+
 		if (!isExistTickets(orderDTO.getTickets())) {
 			orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
 			return orderDTO;
 		}
-		
+
 		for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 			Long qtdAvailableTickets = ticketReservedRepository.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
 			Ticket ticket = ticketRepository.findById(ticketDTO.getId());
 			qtdAvailableTickets = ticket.initialQuantity - qtdAvailableTickets;
-			
+
 			if (qtdAvailableTickets <= ticketDTO.getQuantity()) {
 				orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
 				isOk = false;
 				break;
 			}
 		}
-		
+
 		if (isOk) {
 			for (TicketDTO ticketDTO : orderDTO.getTickets()) {
 				Ticket ticket = ticketRepository.findById(ticketDTO.getId());
@@ -80,29 +81,22 @@ public class EventService {
 				                                              .expirationDate(LocalDateTime.now().plusHours(1))
 				                                              .ticket(ticket)
 				                                              .build();
-				
+
 				ticketReservedRepository.persist(ticketReserved);
 			}
 			orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_APROVADO);
 		}
-		
+
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	@Transactional
 	private boolean isExistTickets(final List<TicketDTO> tickets) {
-		
-		for (TicketDTO ticket : tickets) {
-			Optional<Ticket> byIdOptional = ticketRepository.findByIdOptional(ticket.getId());
-			if (!byIdOptional.isPresent()) {
-				return false;
-			}
-		}
-		
-		return true;
+		List<Long> ids = tickets.stream().map(TicketDTO::getId).collect(Collectors.toList());
+		return ticketRepository.exist(ids);
 	}
-	
+
 	@Transactional
 	private OrderDTO restauraTicket(OrderDTO orderDTO) {
 		try {
@@ -118,7 +112,7 @@ public class EventService {
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	@Transactional
 	private OrderDTO consolidaCompra(OrderDTO orderDTO) {
 		orderDTO.getTickets().forEach(
@@ -127,18 +121,18 @@ public class EventService {
 		log.info("--- Reply channel: " + orderDTO);
 		return orderDTO;
 	}
-	
+
 	public Event getRandomEvent() {
 		Random random = new Random();
 		int totalEvents = Integer.parseInt(Long.valueOf(eventRepository.count()).toString()) + 1;
 		int randomNumber = random.nextInt(totalEvents);
 		return eventRepository.findById((long) randomNumber);
 	}
-	
+
 	public Optional<Event> findById(final Long eventId) {
 		return eventRepository.findByIdOptional(eventId);
 	}
-	
+
 	public List<Event> listAll() {
 		return eventRepository.listAll();
 	}

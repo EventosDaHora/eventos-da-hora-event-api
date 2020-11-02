@@ -28,4 +28,6 @@ public class TicketKafkaHandler {
 		log.info("Pedido que chegou do tópico 'executa-reserva-tickets': " + orderDTO);
 		return eventService.handleOrder(orderDTO);
 	}
+
+
 }
