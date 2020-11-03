@@ -16,6 +16,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 @Log
 @ApplicationScoped
@@ -53,8 +55,8 @@ public class EventService extends GenericService<Event> {
         sections.stream()
                 .map(sectionDTO -> {
                     Section section = sectionDTO.toEntity();
-                    sectionDTO.getTickets()
-                            .stream()
+                    LongStream.rangeClosed(1, sections.size())
+                            .mapToObj(qtd -> new TicketDTO(sectionDTO.getQtdTickets()))
                             .map(TicketDTO::toEntity)
                             .forEach(section::addTicket);
                     return section;

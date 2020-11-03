@@ -19,9 +19,9 @@ public class SectionDTO {
 	private String description;
 	
 	private BigDecimal ammount;
-	
-	private List<TicketDTO> tickets = new ArrayList<>();
 
+	private Long qtdTickets;
+	
 	public Section toEntity() {
 		return Section.builder()
 				.name(name)
