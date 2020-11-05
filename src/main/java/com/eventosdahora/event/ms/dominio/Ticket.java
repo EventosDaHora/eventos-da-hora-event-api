@@ -27,6 +27,9 @@ public class Ticket {
 	@JoinColumn(name = "id_section")
 	private Section section;
 	
+	@Column(name = "id_section", insertable = false, updatable = false)
+	private Long sectionId;
+	
 	@Column(name = "qt_ticket_initial")
 	private Long initialQuantity;
 	
