@@ -28,6 +28,9 @@ public class Section {
 	@JoinColumn(name = "id_event")
 	private Event event;
 	
+	@Column(name = "id_event", insertable = false, updatable = false)
+	private Long eventId;
+	
 	@Column(name = "nm_section")
 	private String name;
 	
