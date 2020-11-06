@@ -23,7 +23,7 @@ public class EventDTO {
 
     private String name;
 
-    @JsonbDateFormat(value="yyyy-MM-dd'T'HH:mm:ss")
+    @JsonbDateFormat(value="dd/MM/yyyy'T'HH:mm")
     private LocalDateTime date;
 
     private String description;

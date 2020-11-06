@@ -1,5 +1,7 @@
 package com.eventosdahora.event.ms.dto;
 
+import com.eventosdahora.event.ms.dominio.City;
+import com.eventosdahora.event.ms.dominio.Country;
 import com.eventosdahora.event.ms.dominio.Localization;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,12 +26,14 @@ public class LocalizationDTO {
 
     private String number;
 
-    private Long country;
+    private String country;
 
-    private Long city;
+    private String city;
 
     public Localization toEntity() {
         return Localization.builder()
+                .country(new Country(null, country))
+                .city(new City(null, city))
                 .localization(localization)
                 .cep(cep)
                 .address(address)
