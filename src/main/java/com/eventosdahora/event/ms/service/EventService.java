@@ -67,6 +67,14 @@ public class EventService extends GenericService<Event> {
                 .map(ImageEventDTO::toEntity)
                 .forEach(event::addImage);
     }
+    
+    public List<Event> getAll(String param){
+       if(param != null){
+           return this.repository.findByParameters(param);
+       }else{
+           return getRepository().listAll();
+       }
+    }
 
     @Override
     public PanacheRepository<Event> getRepository() {
