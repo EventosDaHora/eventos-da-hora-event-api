@@ -17,23 +17,23 @@ public class Localization {
     @Column(name = "nm_localization")
     private String localization;
 
-    @Column(name = "cep", length = 10, nullable = false)
+    @Column(name = "cep")
     private String cep;
 
-    @Column(name = "ds_address", nullable = false)
+    @Column(name = "ds_address")
     private String address;
 
-    @Column(name = "ds_complemento", nullable = false)
+    @Column(name = "ds_complemento")
     private String complement;
 
-    @Column(name = "nu_address", length = 10, nullable = false)
+    @Column(name = "nu_address")
     private String number;
 
     @JoinColumn(name = "id_country")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Country country;
 
     @JoinColumn(name = "id_city")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private City city;
 }

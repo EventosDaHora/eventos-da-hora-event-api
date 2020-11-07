@@ -10,7 +10,6 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.net.URI;
 import java.util.Optional;
 
 @Log
@@ -60,7 +59,9 @@ public class EventResource {
 			Event event = eventService.newEvent(eventDTO);
 			UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
 			uriBuilder.path(event.getId().toString());
-			return Response.created(uriBuilder.build()).build();
+			return Response.created(uriBuilder.build())
+						   .entity(uriBuilder.build())
+						   .build();
 		} catch (RuntimeException re) {
 			return Response.notModified().build();
 		}

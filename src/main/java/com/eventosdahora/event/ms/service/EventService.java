@@ -1,5 +1,7 @@
 package com.eventosdahora.event.ms.service;
 
+import com.eventosdahora.event.ms.dominio.City;
+import com.eventosdahora.event.ms.dominio.Country;
 import com.eventosdahora.event.ms.dominio.Event;
 import com.eventosdahora.event.ms.dominio.Section;
 import com.eventosdahora.event.ms.dto.EventDTO;
@@ -7,6 +9,7 @@ import com.eventosdahora.event.ms.dto.ImageEventDTO;
 import com.eventosdahora.event.ms.dto.SectionDTO;
 import com.eventosdahora.event.ms.dto.TicketDTO;
 import com.eventosdahora.event.ms.repository.EventRepository;
+import com.eventosdahora.event.ms.repository.StatusEventRepository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import lombok.extern.java.Log;
 
@@ -28,6 +31,9 @@ public class EventService extends GenericService<Event> {
     @Inject
     CategoryService categoryService;
 
+    @Inject
+    StatusEventRepository statusEventRepository;
+
     public Optional<Event> getRandomEvent() {
         Random random = new Random();
         int totalEvents = Integer.parseInt(Long.valueOf(repository.count()).toString()) + 1;
@@ -40,6 +46,12 @@ public class EventService extends GenericService<Event> {
         Event event = eventDTO.toEntity();
 
         event.setCategory(categoryService.findById(eventDTO.getIdCategory()));
+
+        event.setStatus(statusEventRepository.findById(3L));
+
+        event.getLocalization().setCity(new City(null, eventDTO.getLocalization().getCity()));
+
+        event.getLocalization().setCountry(new Country(null, eventDTO.getLocalization().getCountry()));
 
         addImages(event, eventDTO.getImages());
 

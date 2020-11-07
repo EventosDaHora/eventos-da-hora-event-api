@@ -45,6 +45,7 @@ SELECT setval('seq_city', 5);
 -- ############ INSERT de status de eventos ############################################################################
 INSERT INTO public.tb_status_event(id_status_event, ds_status_event) VALUES (1, 'AGENDADO');
 INSERT INTO public.tb_status_event(id_status_event, ds_status_event) VALUES (2, 'CANCELADO');
+INSERT INTO public.tb_status_event(id_status_event, ds_status_event) VALUES (3, 'DISPONIVEL');
 -- #####################################################################################################################
 
 
