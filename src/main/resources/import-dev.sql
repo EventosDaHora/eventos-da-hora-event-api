@@ -53,7 +53,7 @@ INSERT INTO public.tb_status_event(id_status_event, ds_status_event) VALUES (3, 
 -- ############ INSERT de EVENTO KISS ##################################################################################
 INSERT INTO public.tb_event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address,
                             nm_event, id_category, id_city, id_country, id_status_event)
-VALUES (1, current_date + 11, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento',
+VALUES (1, TO_TIMESTAMP('01/03/2021 15:30:00','DD/MM/YYYY HH24:MI:SS'), 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento',
         'Estadio Mane Garrincha', 12, 'KISS - END OF THE ROAD', 4, 1, 1, 1);
 SELECT setval('seq_event', 1);
 
@@ -83,7 +83,7 @@ SELECT setval('seq_ticket', 2);
 -- ############ INSERT de EVENTO AC/DC #################################################################################
 INSERT INTO public.tb_event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address,
                             nm_event, id_category, id_city, id_country, id_status_event)
-VALUES (2, current_date + 3 + 1, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Pacaembu',
+VALUES (2, TO_TIMESTAMP('16/04/2021 19:00:00','DD/MM/YYYY HH24:MI:SS'), 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Pacaembu',
         12, 'AC/DC - LOST IN HELL', 4, 2, 1, 1);
 SELECT setval('seq_event', 2);
 
@@ -116,7 +116,7 @@ SELECT setval('seq_ticket', 5);
 -- ############ INSERT de EVENTO #######################################################################################
 INSERT INTO public.tb_event(id_event, dt_event, ds_event, ds_address, cep, ds_complemento, nm_localization, nu_address,
                             nm_event, id_category, id_city, id_country, id_status_event)
-VALUES (3, current_date + 22, 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Mineirao',
+VALUES (3, TO_TIMESTAMP('17/06/2021 20:30:00','DD/MM/YYYY HH24:MI:SS'), 'Evento muito legal', 'Q. 102, CJ. 24', '71692170', 'Complemento', 'Mineirao',
         12, 'Tributo ao Mamonas Assasinas ', 4, 3, 1, 1);
 SELECT setval('seq_event', 3);
 
