@@ -12,7 +12,7 @@ import static io.quarkus.panache.common.Parameters.with;
 public class EventRepository implements PanacheRepository<Event> {
 	
 	public List<Event> findByParameters(String param){
-		return find("upper(param) like upper(?1)", "%"+param+"%").list();
+		return find("upper(name) like upper(?1)", "%"+param+"%").list();
 	}
 	
 }

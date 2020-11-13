@@ -80,10 +80,13 @@ public class EventService extends GenericService<Event> {
                 .forEach(event::addImage);
     }
     
-    public List<Event> getAll(String param){
+    public List<Event> getAll(String param, Long idCategory){
        if(param != null){
            return this.repository.findByParameters(param);
-       }else{
+       }else if(idCategory != null){
+           return this.repository.list("category.id", idCategory);
+       }
+       else{
            return getRepository().listAll();
        }
     }

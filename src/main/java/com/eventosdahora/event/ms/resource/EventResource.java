@@ -25,8 +25,8 @@ public class EventResource {
 	SectionService sectionService;
 	
 	@GET
-	public Response getAll(@QueryParam("searchWord") String params) {
-		return Response.ok(eventService.getAll(params)).build();
+	public Response getAll(@QueryParam("searchWord") String params, @QueryParam("categoryId") Long idCateogy) {
+		return Response.ok(eventService.getAll(params, idCateogy)).build();
 	}
 	
 	@GET
