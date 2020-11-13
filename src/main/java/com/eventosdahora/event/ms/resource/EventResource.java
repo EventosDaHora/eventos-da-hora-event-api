@@ -60,7 +60,7 @@ public class EventResource {
 			UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
 			uriBuilder.path(event.getId().toString());
 			return Response.created(uriBuilder.build())
-						   .entity(uriBuilder.build())
+						   .entity(event)
 						   .build();
 		} catch (RuntimeException re) {
 			return Response.notModified().build();
