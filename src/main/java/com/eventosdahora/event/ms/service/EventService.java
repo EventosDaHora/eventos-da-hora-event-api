@@ -66,7 +66,7 @@ public class EventService extends GenericService<Event> {
         sections.stream()
                 .map(sectionDTO -> {
                     Section section = sectionDTO.toEntity();
-                    LongStream.rangeClosed(1, sections.size())
+                    LongStream.range(0, 1)
                             .mapToObj(qtd -> new TicketDTO(sectionDTO.getQtdTickets()))
                             .map(TicketDTO::toEntity)
                             .forEach(section::addTicket);
