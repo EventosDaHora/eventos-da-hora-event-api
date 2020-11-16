@@ -31,7 +31,7 @@ public class EventResource {
 	
 	@GET
 	@Path("/{eventId}")
-	public Response getSectionById(@PathParam Long eventId) {
+	public Response getSectionById(@PathParam("eventId") Long eventId) {
 		return eventService.findByIdOptional(eventId)
 			.map(event -> Response.ok(event).build())
 			.orElseGet(() -> Response.status(Response.Status.NOT_FOUND.getStatusCode(), "eventId not found").build());
