@@ -19,11 +19,11 @@ public class TicketKafkaHandler {
 	@Inject
 	EventKafkaService eventKafkaService;
 	
-	@Incoming("tickets")
-	@Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
-	@Outgoing("envia-resposta")
-	@Blocking
-	@Transactional
+	//@Incoming("tickets")
+	//@Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
+	//@Outgoing("envia-resposta")
+	//@Blocking
+	//@Transactional
 	public OrderDTO processor(OrderDTO orderDTO) throws Exception {
 		log.info("Pedido que chegou do tópico 'executa-reserva-tickets': " + orderDTO);
 		return eventKafkaService.handleOrder(orderDTO);
