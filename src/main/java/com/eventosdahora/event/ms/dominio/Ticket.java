@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_ticket")
+@ToString
 public class Ticket {
 	
 	@Id

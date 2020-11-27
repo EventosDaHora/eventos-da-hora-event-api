@@ -16,7 +16,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDTO {
 	
@@ -41,4 +40,13 @@ public class OrderDTO {
 	private List<TicketDTO> tickets = new ArrayList<>();
 	
 	private PaymentDTO payment;
+
+	@Override
+	public String toString() {
+		return "OrderDTO{" +
+				"orderId=" + orderId +
+				", orderState=" + orderState +
+				", orderEvent=" + orderEvent +
+				'}';
+	}
 }

@@ -56,11 +56,17 @@ public class EventKafkaService {
         }
 
         for (TicketDTO ticketDTO : orderDTO.getTickets()) {
-            Long qtdAvailableTickets = ticketReservedRepository.findQtdAvailableTickets(ticketDTO.getId(), orderDTO.getOrderId());
+            log.info("OrderID: " + orderDTO.getOrderId());
+            log.info("TicketID: " + ticketDTO.getId());
+            Long qtdReservedTickets = ticketReservedRepository.findQtdReservedTickets(ticketDTO.getId());
+            log.info("Quantidade reservada: " + qtdReservedTickets);
+
             Ticket ticket = ticketRepository.findById(ticketDTO.getId());
-            qtdAvailableTickets = ticket.getInitialQuantity() - qtdAvailableTickets;
+            long qtdAvailableTickets = ticket.getInitialQuantity() - qtdReservedTickets;
+            log.info("Quantidade disponível após cálculo: " + qtdAvailableTickets);
 
             if (qtdAvailableTickets <= ticketDTO.getQuantity()) {
+                log.severe("Reserva negada");
                 orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_NEGADO);
                 isOk = false;
                 break;
@@ -81,6 +87,7 @@ public class EventKafkaService {
                 ticketReservedRepository.persist(ticketReserved);
             }
             orderDTO.setOrderEvent(OrderEvent.RESERVA_TICKET_APROVADO);
+            log.info("Reserva com sucesso");
         }
 
         log.info("--- Reply channel: " + orderDTO);
